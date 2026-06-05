@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copa do Mundo 2026 - Cobertura Premium</title>
+    <style>
+        /* Configurações Globais e Reset */
+        :root {
+            --cor-primaria: #006437;    /* Verde Copa */
+            --cor-secundaria: #ffdf00;  /* Amarelo Ouro */
+            --cor-escura: #0b1a11;
+            --cor-clara: #f4f7f5;
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-clara);
+            color: var(--cor-escura);
+            line-height: 1.6;
+        }
+
+        /* 1. Cabeçalho (Header) */
+        header {
+            background-color: rgba(0, 100, 55, 0.95);
+            backdrop-filter: blur(10px); /* Efeito de vidro */
+            color: #fff;
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        nav .logo span {
+            color: var(--cor-secundaria);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Linha decorativa animada no menu */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--cor-secundaria);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        /* 2. Área de Destaque (Hero Section) com Vídeo em Loop */
+        .hero {
+            position: relative;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Configuração do Vídeo de Fundo */
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        /* Camada escura por cima do vídeo para dar contraste ao texto */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(11, 26, 17, 0.6), rgba(11, 26, 17, 0.85));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1.5rem;
+            animation: fadin 1s ease-out;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        /* 3. Área de Conteúdo (Grid Principal) */
+        main {
+            max-width: 1200px;
+            margin: -50px auto 4rem auto; /* Sobe um pouco por cima do hero */
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 2.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Responsividade para Telas Menores */
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+                margin-top: 2rem;
+            }
+        }
+
+        /* Estilização dos Blocos Brancos */
+        .card-painel {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--sombra);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .card-painel h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--cor-primaria);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 4. Tabela de Classificação Modernizada */
+        .table-container {
+            overflow-x: auto; /* Garante que não quebre no celular */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 16px 20px;
+        }
+
+        th {
+            background-color: #f8faf9;
+            color: #627d6f;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #e1e8e4;
+        }
+
+        td {
+            border-bottom: 1px solid #edf2ef;
+            font-size: 1rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #fafffc;
+        }
+
+        .pos {
+            font-weight: bold;
+            color: var(--cor-primaria);
+            width: 50px;
+        }
+
+        .pts {
+            font-weight: 800;
+            color: #000;
+        }
+
+        /* 5. Formulário de Torcedor Estilizado */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e8e4;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input[type="email"]:focus {
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 4px rgba(0, 100, 55, 0.1);
+        }
+
+        /* Customização das Seleções (Checkboxes) */
+        .selecoes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .opcao-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid #edf2ef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opcao-checkbox:hover {
+            background-color: #fafffc;
+            border-color: var(--cor-primaria);
+        }
+
+        .opcao-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--cor-primaria); /* Muda a cor interna do checkbox */
+        }
+
+        /* Botão de Inscrição */
+        button {
+            width: 100%;
+            background-color: var(--cor-primaria);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 100, 55, 0.2);
+        }
+
+        button:hover {
+            background-color: #004d2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 100, 55, 0.3);
+        }
+
+        /* Animação de entrada */
+        @keyframes fadin {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">COPA DO MUNDO<span> 2026</span></div>
+            <ul>
+                <li><a href="#jogos">Jogos</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#selecoes">Seleções</a></li>
+            </ul>
+        </nav>
+    </header>
+ <iframe width="1910" height="300" src="video.mp4" title="YouTube video player" > </iframe>
+    <section class="hero">
+
+
+]        
+        <div class="hero-content">
+            <h2>O Campeonato Mais Dificil Do Mundo</h2>
+            <p>Assista aos melhores momentos das copas passadas e fique por dentro de cada detalhe da cobertura oficial.</p>
+        </div>
+    </section>
+
+    <main>
+        
+        <section class="card-painel" id="jogos">
+            <h3>📊 Classificação do Grupo A</h3>    
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="pos">Pos</th>
+                            <th>Seleção</th>
+                            <th class="pts">PTS</th>
+                            <th>V</th>
+                            <th>E</th>
+                            <th>D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pos">1º</td>
+                            <td>🇧🇷 Brasil</td>
+                            <td class="pts">9</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="pos">2º</td>
+                            <td>🇫🇷 França</td>
+                            <td class="pts">6</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td class="pos">3º</td>
+                            <td>🇦🇷 Argentina</td>
+                            <td class="pts">3</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="pos">4º</td>
+                            <td>🇯🇵 Japão</td>
+                            <td class="pts">0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card-painel" id="selecoes">
+            <h3>🔔 Alertas de Jogos</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="email">E-mail para Notificações</label>
+                    <input type="email" id="email" placeholder="exemplo@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quais seleções você quer acompanhar?</label>
+                    <div class="selecoes-grid">
+                        <label class="opcao-checkbox" for="sel-br">
+                            <input type="checkbox" id="sel-br" value="Brasil">
+                            <span>Brasil</span>
+                        </label>
+                        <label class="opcao-checkbox" for="sel-ar">
+                            <input type="checkbox" id="sel-ar" value="Argentina">
+                            <span>Argentina</span>
+                        </label>
+                        <label class="opcao-checkbox" for="sel-fr">
+                            <input type="checkbox" id="sel-fr" value="França">
+                            <span>França</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit">Inscrever-se na Cobertura</button>
+            </form>
+        </section>
+
+    </main>
+
+</body>
+</html>
